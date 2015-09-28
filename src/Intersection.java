@@ -12,11 +12,9 @@ public class Intersection {
 	  protected TrafficLight minorRoadLightRight;
 
 	  //the left and right car sensors respectively
-//	  protected Sensor leftSensor_;
 	  protected Sensor northRightSensor;
 	  protected Sensor southRightSensor;
 	  protected Sensor minorRightSensor;
-
 
 	  public Intersection()
 	  {
@@ -60,9 +58,15 @@ public class Intersection {
 	      southLightStraight.signalChange();
 	      southLightRight.signalChange();
 	    }
+	    if (minorRightSensor.isActivated() && ( !(northRightSensor.isActivated()) && !(southRightSensor.isActivated()) ) ) {
+	    	northLightLeft.signalChange();
+	    	northLightRight.signalChange();
+	    	northLightStraight.signalChange();
+	    	southLightLeft.signalChange();
+	    	southLightStraight.signalChange();
+	    	southLightRight.signalChange();
+	    }
 	  }
-
-	  
 
 	  public TrafficLight getNorthLightLeft() {
 		return northLightLeft;
