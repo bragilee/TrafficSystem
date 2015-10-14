@@ -51,21 +51,33 @@ public class Intersection {
 	    
 
 	    if (northRightSensor.isActivated() || southRightSensor.isActivated()) {
-	      northLightLeft.signalChange();
-	      northLightStraight.signalChange();
-	      northLightRight.signalChange();
-	      southLightLeft.signalChange();
-	      southLightStraight.signalChange();
-	      southLightRight.signalChange();
-	    }
-	    if (minorRightSensor.isActivated() && ( !(northRightSensor.isActivated()) && !(southRightSensor.isActivated()) ) ) {
-	    	northLightLeft.signalChange();
-	    	northLightRight.signalChange();
-	    	northLightStraight.signalChange();
-	    	southLightLeft.signalChange();
-	    	southLightStraight.signalChange();
-	    	southLightRight.signalChange();
-	    }
+	          northLightLeft.signalChange();
+	          northLightStraight.signalChange();
+	          northLightRight.signalChange();
+	          southLightLeft.signalChange();
+	          southLightStraight.signalChange();
+	          southLightRight.signalChange();
+	        }
+	        
+	        else if (minorRightSensor.isActivated()) {
+	            if(northLightStraight.getColour() == LightColour.GREEN){
+	              northLightLeft.signalChange();
+	              northLightStraight.signalChange();           
+	              southLightLeft.signalChange();
+	              southLightStraight.signalChange();
+	                minorRoadLightLeft.signalChange();
+	              minorRoadLightStraight.signalChange();
+	              minorRoadLightRight.signalChange();
+	            }
+	            else if(northLightRight.getColour() == LightColour.GREEN){
+	              northLightRight.signalChange();
+	              southLightRight.signalChange();
+	              minorRoadLightLeft.signalChange();
+	              minorRoadLightStraight.signalChange();
+	              minorRoadLightRight.signalChange();
+	            }
+	        }
+
 	  }
 
 	  public TrafficLight getNorthLightLeft() {
@@ -151,6 +163,4 @@ public class Intersection {
 				+ ", minorRoadLightStraight=" + minorRoadLightStraight
 				+ ", minorRoadLightRight=" + minorRoadLightRight + "]";
 	}
-
-	
 }
