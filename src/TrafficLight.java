@@ -23,7 +23,6 @@ abstract public class TrafficLight {
 //  build2
 //  final protected static double FAILURE_PROBABILITY = 0.01D;
 
-
 	//true if and only if the light is working
 	protected boolean workingState = true;
 

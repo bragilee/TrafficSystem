@@ -1,6 +1,6 @@
 
 public class Intersection {
-	//the traffic lights
+	  //the traffic lights
 	  protected TrafficLight northLightLeft;
 	  protected TrafficLight northLightStraight;
 	  protected TrafficLight northLightRight;
@@ -20,13 +20,16 @@ public class Intersection {
 	  {
 	    northLightLeft = new MajorRoadTrafficLight(LightColour.GREEN);
 	    northLightStraight = new MajorRoadTrafficLight(LightColour.GREEN);
-	    northLightRight = new MajorRoadTrafficLight(LightColour.RED);
+	    northLightRight = new MajorRoadTrafficLightTurn(LightColour.RED);
+	    
 	    southLightLeft = new MajorRoadTrafficLight(LightColour.GREEN);
 	    southLightStraight = new MajorRoadTrafficLight(LightColour.GREEN);
-	    southLightRight = new MajorRoadTrafficLight(LightColour.RED);
+	    southLightRight = new MajorRoadTrafficLightTurn(LightColour.RED);
+	    
 	    minorRoadLightLeft = new MinorRoadTrafficLight();
 	    minorRoadLightStraight = new MinorRoadTrafficLight();
 	    minorRoadLightRight = new MinorRoadTrafficLight();
+	    
 	    northRightSensor = new Sensor();
 	    southRightSensor = new Sensor();
 	    minorRightSensor = new Sensor();
@@ -39,48 +42,59 @@ public class Intersection {
 	    northLightLeft.tick();
 	    northLightStraight.tick();
 	    northLightRight.tick();
+	    
 	    southLightLeft.tick();
 	    southLightStraight.tick();
 	    southLightRight.tick();
+	    
 	    minorRoadLightLeft.tick();
 	    minorRoadLightStraight.tick();
 	    minorRoadLightRight.tick();
+	    
 	    northRightSensor.tick(input);
 	    southRightSensor.tick(input);
 	    minorRightSensor.tick(input);
-	    
 
 	    if (northRightSensor.isActivated() || southRightSensor.isActivated()) {
+	    	
 	          northLightLeft.signalChange();
 	          northLightStraight.signalChange();
 	          northLightRight.signalChange();
+	          
 	          southLightLeft.signalChange();
 	          southLightStraight.signalChange();
 	          southLightRight.signalChange();
 	        }
 	        
-	        else if (minorRightSensor.isActivated()) {
-	            if(northLightStraight.getColour() == LightColour.GREEN){
-	              northLightLeft.signalChange();
-	              northLightStraight.signalChange();           
-	              southLightLeft.signalChange();
-	              southLightStraight.signalChange();
-	                minorRoadLightLeft.signalChange();
-	              minorRoadLightStraight.signalChange();
-	              minorRoadLightRight.signalChange();
-	            }
-	            else if(northLightRight.getColour() == LightColour.GREEN){
-	              northLightRight.signalChange();
-	              southLightRight.signalChange();
-	              minorRoadLightLeft.signalChange();
-	              minorRoadLightStraight.signalChange();
-	              minorRoadLightRight.signalChange();
-	            }
-	        }
+	    else if (minorRightSensor.isActivated()) {
+
+	    	if(northLightStraight.getColour() == LightColour.GREEN){
+
+	    		northLightLeft.signalChange();
+	    		northLightStraight.signalChange();
+
+	    		southLightLeft.signalChange();
+	    		southLightStraight.signalChange();
+
+	    		minorRoadLightLeft.signalChange();
+	    		minorRoadLightStraight.signalChange();
+	    		minorRoadLightRight.signalChange();
+	    	}
+
+	    	else if(northLightRight.getColour() == LightColour.GREEN){
+
+	    		northLightRight.signalChange();
+	    		southLightRight.signalChange();
+
+	    		minorRoadLightLeft.signalChange();
+	    		minorRoadLightStraight.signalChange();
+	    		minorRoadLightRight.signalChange();
+	    	}
+	    }
 
 	  }
 
-	  public TrafficLight getNorthLightLeft() {
+	public TrafficLight getNorthLightLeft() {
 		return northLightLeft;
 	}
 
