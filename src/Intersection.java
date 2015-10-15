@@ -68,7 +68,8 @@ public class Intersection {
 	        
 	    else if (minorRightSensor.isActivated()) {
 
-	    	if(northLightStraight.getColour() == LightColour.GREEN){
+	    	if(northLightStraight.getColour() == LightColour.GREEN || northLightLeft.getColour() == LightColour.GREEN 
+	    			|| southLightStraight.getColour() == LightColour.GREEN || southLightLeft.getColour() == LightColour.GREEN ){
 
 	    		northLightLeft.signalChange();
 	    		northLightStraight.signalChange();
@@ -81,7 +82,7 @@ public class Intersection {
 	    		minorRoadLightRight.signalChange();
 	    	}
 
-	    	else if(northLightRight.getColour() == LightColour.GREEN){
+	    	else if(northLightRight.getColour() == LightColour.GREEN || southLightRight.getColour() == LightColour.GREEN){
 
 	    		northLightRight.signalChange();
 	    		southLightRight.signalChange();

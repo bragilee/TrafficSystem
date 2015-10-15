@@ -77,13 +77,13 @@ public class IntersectionOracle {
 		LightColour southLightRight = intersection.getSouthLightRight().getColour();		
 		
 		LightColour minorLightLeft = intersection.getMinorRoadLightLeft().getColour();
-		LightColour minorLightStright = intersection.getMinorRoadLightLeft().getColour();
-		LightColour minorLightRight = intersection.getMinorRoadLightLeft().getColour();
+		LightColour minorLightStraight = intersection.getMinorRoadLightStraight().getColour();
+		LightColour minorLightRight = intersection.getMinorRoadLightRight().getColour();
 		
 		boolean result = ( (northLightLeft == lightPatternMajor[indexLight][0]) && (northLightStraight == lightPatternMajor[indexLight][0]) &&
 				(northLightRight == lightPatternMajor[indexLight][1]) && (southLightLeft == lightPatternMajor[indexLight][0]) && 
 				(southLightStraight == lightPatternMajor[indexLight][0]) && (southLightRight == lightPatternMajor[indexLight][1]) &&
-				(minorLightLeft == lightPatternMajor[indexLight][2]) && (minorLightStright == lightPatternMajor[indexLight][2]) &&
+				(minorLightLeft == lightPatternMajor[indexLight][2]) && (minorLightStraight == lightPatternMajor[indexLight][2]) &&
 				(minorLightRight == lightPatternMajor[indexLight][2]) );
 		
 		if (input != EMPTY || indexLight > 0) {
