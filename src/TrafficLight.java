@@ -14,7 +14,7 @@ abstract public class TrafficLight {
 
 	//the probability of the light dropping out at each tick
 //  build1
-	final protected static double FAILURE_PROBABILITY = 0.0001D;
+	final protected static double FAILURE_PROBABILITY = 0.001D;
 //	build2
 //	final protected static double FAILURE_PROBABILITY = 0.0D;
 

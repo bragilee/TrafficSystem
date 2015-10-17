@@ -99,7 +99,7 @@ public class IntersectionOracleParallel {
 				((southLightRightA == lightPatternMajor[indexLight][1]) || (southLightRightB == lightPatternMajor[indexLight][1])) &&
 				((minorLightLeftA == lightPatternMajor[indexLight][2]) || (minorLightLeftB == lightPatternMajor[indexLight][2]) ) && 
 				((minorLightStrightA == lightPatternMajor[indexLight][2]) || (minorLightStrightB == lightPatternMajor[indexLight][2])) &&
-				((minorLightRightA == lightPatternMajor[indexLight][2]) || (minorLightRightA == lightPatternMajor[indexLight][2]))  );
+				((minorLightRightA == lightPatternMajor[indexLight][2]) || (minorLightRightB == lightPatternMajor[indexLight][2]))  );
 		
 		if (input != EMPTY || indexLight > 0) {
 			indexLight++; 
@@ -111,6 +111,7 @@ public class IntersectionOracleParallel {
 		if (indexLightMinor == lightPatternMinor.length) {
 			indexLightMinor = 0; 
 			}
+		
 		LightColour northLightLeftA = intersectionParallel.getNorthLightLeftA().getColour();
 		LightColour northLightLeftB = intersectionParallel.getNorthLightLeftB().getColour();
 		LightColour northLightStraightA = intersectionParallel.getNorthLightStraightA().getColour();
@@ -140,7 +141,7 @@ public class IntersectionOracleParallel {
 				((southLightRightA == lightPatternMinor[indexLight][1]) || (southLightRightB == lightPatternMinor[indexLight][1])) &&
 				((minorLightLeftA == lightPatternMinor[indexLight][2]) || (minorLightLeftB == lightPatternMinor[indexLight][2]) ) && 
 				((minorLightStrightA == lightPatternMinor[indexLight][2]) || (minorLightStrightB == lightPatternMinor[indexLight][2])) &&
-				((minorLightRightA == lightPatternMinor[indexLight][2]) || (minorLightRightA == lightPatternMinor[indexLight][2]))  );
+				((minorLightRightA == lightPatternMinor[indexLight][2]) || (minorLightRightB == lightPatternMinor[indexLight][2]))  );
 		
 		if (input != EMPTY || indexLightMinor > 0) {
 			indexLightMinor++; 

@@ -1,6 +1,5 @@
 
-public class IntersectionDriver {
-
+public class IntersectionDriverSingleTick {
 	final public static char CAR = 'C';
 	final public static char EMPTY = 'E';
 	//the number of times to run a simulation
@@ -25,7 +24,6 @@ public class IntersectionDriver {
 //		failed = new int[5];
 //		operationalMatrix = new float[5][5];
 //	}
-	
 	//method for generating markov matrix
 //	public void generateMatrix(int numberTicks) {
 //		System.out.println("===============The transition matrix==============");
@@ -34,7 +32,6 @@ public class IntersectionDriver {
 //		printMatrix();
 //		System.out.println();
 //	}
-	
 	//print matrix generated
 //	public void printMatrix() {
 //		// TODO Auto-generated method stub
@@ -70,10 +67,10 @@ public class IntersectionDriver {
 		fail = drive(numberTicks);
 		System.out.println("Failures = " + fail + " out of " + NUMBER_RUNS + " runs");
 		System.out.println("Failure rate = " + fail/(double)NUMBER_RUNS);
-//		System.out.println();
+		System.out.println();
 //		System.out.println("The probability vector is: ");
 //		printProbability(numberTicks,operationalMatrix);
-//		System.out.println();
+		System.out.println();
 	}
 	//simulate the intersection system
 	private int drive(int numberTicks) {
@@ -82,137 +79,73 @@ public class IntersectionDriver {
 		int failCount = 0;
 		for (int run = 0; run < NUMBER_RUNS; run++) {
 			//randomly create the input according to the operational profile
-			char [] inputMajor = new char[numberTicks];
-			char [] inputMinor = new char[numberTicks];
+			char [] input = new char[numberTicks];
+//			char [] inputMajorNorth = new char[numberTicks];
+//			char [] inputMinor = new char[numberTicks];
 			
-			//Random ticks on the major road
 			for (int i = 0; i < numberTicks; i++) {
 				double nextRandom = Math.random();
 				if (nextRandom < CAR_PROB) {
-					inputMajor[i] = CAR;
+					input[i] = CAR;
 				}
 				else {
-					inputMajor[i] = EMPTY;
+					input[i] = EMPTY;
 				}
+//				System.out.println(input[i]);
 			}
 			
-			//Random ticks on the minor road
-			for (int i = 0; i < numberTicks; i++) {
-				double nextRandom = Math.random();
-				if (nextRandom < CAR_PROB) {
-					inputMinor[i] = CAR;
-				}
-				else {
-					inputMinor[i] = EMPTY;
-				}
-			}	
-			
-			failCount += runTicks(inputMajor,inputMinor);
-			
-			//Original code
-//			failCount += runTicks(input,previousStatus);
-//			failCount +=
+			failCount += runTicks(input);
 //			previousStatus = "";
 		}
 		return failCount;
 	}
-	
-	//Original code
-//	public int runTicks(char [] input,String previousStatus)
-	public int runTicks(char [] inputMajor, char [] inputMinor)
+
+	public int runTicks(char [] input)
 	{
-		int fail = 0;
-		Intersection intersection = new Intersection();
-		IntersectionOracle oracle = new IntersectionOracle(intersection);
-		
-		int index = 0;
-		while (index < inputMajor.length) {
-			int firstMajor = -1;
-			int firstMinor = -1;
-			
-			//record the index of the first car at major road
-			for (int i = 0; i < 9; i++) {
-				if (inputMajor[i] == CAR) {
-					firstMajor = i;
-					break;
-				}
-			}
-			
-			//record the index of the first car at minor road
-			for (int i = 0; i < 9; i++) {
-				if (inputMinor[i] == CAR) {
-					firstMinor = i;
-					break;
-				}
-			}
-			
-			//decide which pattern to match currently
-			if (firstMajor == -1) {
-				if (firstMinor > -1) {
-					fail = verifyTicksMinor(intersection,oracle,inputMinor);
-				}				
-			}
-			else {
-				if (firstMinor == -1) {
-					fail = verifyTicksMajor(intersection,oracle,inputMajor);
-				}
-				else {
-					if (firstMajor < firstMinor) {
-						fail = verifyTicksMajor(intersection,oracle,inputMajor);
-					}
-					else {
-						fail = verifyTicksMinor(intersection,oracle,inputMinor);
-;					}
-				}
-			}
-			
-			if (fail > 0) {
-				break;
-			}
-		
-			index = index + 9;
-		}
-		
-		return fail;
-	}
-	
-	public int verifyTicksMajor(Intersection intersection,IntersectionOracle oracle, char [] inputMajor) {
+
 		int failMajor = 0;
-		for (int tick = 0; tick < inputMajor.length; tick++) {
-			intersection.tick(inputMajor[tick]);
-			boolean verifyMajorPattern = oracle.verifyMajorPattern(inputMajor[tick]);
-			if (!verifyMajorPattern) {
-				failMajor = failMajor + 1;
-				break;
-			}
-		}
-		return failMajor;
-		
-	}
-	
-	public int verifyTicksMinor(Intersection intersection,IntersectionOracle oracle, char [] inputMinor) {
 		int failMinor = 0;
-		for (int tick = 0; tick < inputMinor.length; tick++) {
-			intersection.tick(inputMinor[tick]);
-			boolean verifyMinorPattern = oracle.verifyMinorPattern(inputMinor[tick]);
-			if (!verifyMinorPattern) {
-				failMinor = failMinor + 1;
+		IntersectionParallel intersectionP = new IntersectionParallel();
+		IntersectionOracleParallel oracleSingleTick = new IntersectionOracleParallel(intersectionP);
+		IntersectionParallel intersectionP2 = new IntersectionParallel();
+		IntersectionOracleParallel oracleSingleTick2 = new IntersectionOracleParallel(intersectionP);
+//		Intersection intersectionP = new Intersection();
+//		IntersectionOracle oracleSingleTick = new IntersectionOracle(intersectionP);
+//		Intersection intersectionP2 = new Intersection();
+//		IntersectionOracle oracleSingleTick2 = new IntersectionOracle(intersectionP);
+		for (int tick = 0; tick < input.length; tick++) {
+			intersectionP.tick(input[tick]);
+			boolean verify = oracleSingleTick.verifyMajorPattern(input[tick]);
+			if (!verify) {
+				failMajor = 1;
 				break;
 			}
+
 		}
-		return failMinor;
-	}
+		if (failMajor == 1) {
+			for (int tick = 0; tick < input.length; tick++) {
+				intersectionP2.tick(input[tick]);
+//				System.out.println(input[tick]);
+				boolean verify2 = oracleSingleTick2.verifyMinorPattern(input[tick]);
+				if (!verify2) {
+					failMinor = 1;
+					break;
+				}
+			}	
+		}
 		
+		if ((failMajor == 1) && (failMinor ==1 )) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
 		//iterate over the input, use the oracle to verify the correctness
 		//of the intersection. 
-//		for (int tick = 0; tick < inputMajor.length; tick++) {
-//			intersection.tick(inputMajor[tick]);
-//			boolean verifyMajorPattern = oracle.verifyMajorPattern(inputMajor[tick]);
-//			if (!verifyMajorPattern) {
-//				failMajor = failMajor + 1;
-//				break;
-//			}
-//		}
+//		for (int tick = 0; tick < input.length; tick++) {
+//			intersection.tick(input[tick]);
+//			String verify = oracle.verify(input[tick]);
 //			if (!previousStatus.isEmpty()) {
 //				if (previousStatus.equals("FullyOperated")) {
 //					fullyOperated[Transition(verify)]++;
@@ -234,21 +167,8 @@ public class IntersectionDriver {
 //				fails = 1;
 //			}
 //			previousStatus = verify;
-		
-		
-//		for (int tick = 0; tick < inputMinor.length; tick++) {
-//			intersection.tick(inputMinor[tick]);
-//			boolean verifyMinorPattern = oracle.verifyMinorPattern(inputMinor[tick]);
-//			if (!verifyMinorPattern) {
-//				failMinor = failMinor + 1;
-//				break;
-//			}
 //		}
-//		
-//		if (failMajor == 0 && failMinor == 0) {
-//			return 0;
-//		}
-//		return 1;
+//		return fails == 1 ? 1: 0;
 //	}
 	
 	/*
@@ -323,10 +243,11 @@ public class IntersectionDriver {
 	 * main 
 	 */
 	public static void main(String[] args) {
-		IntersectionDriver intersectionDriver = new IntersectionDriver();
+		IntersectionDriverSingleTick intersectionDriverSingleTick = new IntersectionDriverSingleTick();
 //		intersectionDriver.generateMatrix(10000);
-		intersectionDriver.driveTest(10);
+		intersectionDriverSingleTick.driveTest(100);
 //		intersectionDriver.driveTest(100);
 //		intersectionDriver.driveTest(1000);
 	}
+	
 }
