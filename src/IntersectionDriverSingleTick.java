@@ -110,9 +110,9 @@ public class IntersectionDriverSingleTick {
 		IntersectionParallel intersectionP2 = new IntersectionParallel();
 		IntersectionOracleParallel oracleSingleTick2 = new IntersectionOracleParallel(intersectionP);
 //		Intersection intersectionP = new Intersection();
-//		IntersectionOracle oracleSingleTick = new IntersectionOracle(intersectionP);
+//		IntersectionOracleSingleTick oracleSingleTick = new IntersectionOracleSingleTick(intersectionP);
 //		Intersection intersectionP2 = new Intersection();
-//		IntersectionOracle oracleSingleTick2 = new IntersectionOracle(intersectionP);
+//		IntersectionOracleSingleTick oracleSingleTick2 = new IntersectionOracleSingleTick(intersectionP);
 		for (int tick = 0; tick < input.length; tick++) {
 			intersectionP.tick(input[tick]);
 			boolean verify = oracleSingleTick.verifyMajorPattern(input[tick]);
@@ -245,7 +245,7 @@ public class IntersectionDriverSingleTick {
 	public static void main(String[] args) {
 		IntersectionDriverSingleTick intersectionDriverSingleTick = new IntersectionDriverSingleTick();
 //		intersectionDriver.generateMatrix(10000);
-		intersectionDriverSingleTick.driveTest(100);
+		intersectionDriverSingleTick.driveTest(10000);
 //		intersectionDriver.driveTest(100);
 //		intersectionDriver.driveTest(1000);
 	}
