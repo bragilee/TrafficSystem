@@ -12,16 +12,8 @@ abstract public class TrafficLight {
 	//the time that the major road light should be red
 	final public static int RED_TIME = AMBER_TIME + GREEN_TIME;
 
-	//the probability of the light dropping out at each tick
-//  build1
-	final protected static double FAILURE_PROBABILITY = 0.00001D;
-//	build2
-//	final protected static double FAILURE_PROBABILITY = 0.0D;
+	final protected static double FAILURE_PROBABILITY = 0.01D;
 
-//  build1
-//  final protected static double FAILURE_PROBABILITY = 0.02D;
-//  build2
-//  final protected static double FAILURE_PROBABILITY = 0.01D;
 
 	//true if and only if the light is working
 	protected boolean workingState = true;

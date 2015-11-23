@@ -1,3 +1,8 @@
+/*
+ * This class defines the a serial-structured intersection. 
+ * Each direction has three main traffic lights controlling the traffic to go left, straight and right.
+ * Once the light is broken, the intersection broke.
+ */
 
 public class Intersection {
 	  //the traffic lights

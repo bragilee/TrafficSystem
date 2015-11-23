@@ -1,3 +1,9 @@
+/*
+ * This class defines a parallel-structured intersections. 
+ * Each direction has three main traffic lights controlling the traffic to go left, straight and right, and three backup ligths as well.
+ * Once the main traffic light broke, the backup traffic light is triggered and used.
+ */
+
 public class IntersectionParallel {
 	// the traffic lights
 	protected TrafficLight northLightLeftA;

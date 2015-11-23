@@ -5,16 +5,8 @@ public class Sensor
 	final static protected char EMPTY = 'E';
 	final static protected char CAR = 'C';
 
-//	the probability of the light dropping out at each tick
-//	build1
-//	final protected static double FAILURE_PROBABILITY = 0.001D;
-//	build2
-//	final protected static double FAILURE_PROBABILITY = 0.002D;
-
-//  build1
-//  final protected static double FAILURE_PROBABILITY = 0.01D;
-//	build2
-	final protected static double FAILURE_PROBABILITY = 0.0D;
+//	the probability of the sensor dropping out at each tick
+	final protected static double FAILURE_PROBABILITY = 0.1D;
 
 	//true if and only if this was activated in the previous tick
 	protected boolean activatedState;

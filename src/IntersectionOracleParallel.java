@@ -1,4 +1,7 @@
-
+/*
+ * This class defines oracle for the parallel-structured intersection system,
+ * along with verification method.
+ */
 public class IntersectionOracleParallel {
 	final public static char CAR = 'C';
 	final public static char EMPTY = 'E';
@@ -34,24 +37,6 @@ public class IntersectionOracleParallel {
 			{LightColour.RED, LightColour.RED, LightColour.AMBER},
 		};
 	
-	//have not been used yet
-	private LightColour [][] lightPatternMix = 
-		{	{LightColour.GREEN, LightColour.RED, LightColour.RED},
-			{LightColour.AMBER, LightColour.RED, LightColour.RED},
-			{LightColour.AMBER, LightColour.RED, LightColour.RED},
-			{LightColour.RED, LightColour.GREEN, LightColour.RED},
-			{LightColour.RED, LightColour.GREEN, LightColour.RED},
-			{LightColour.RED, LightColour.GREEN, LightColour.RED},
-			{LightColour.RED, LightColour.GREEN, LightColour.RED},
-			{LightColour.RED, LightColour.AMBER, LightColour.RED},
-			{LightColour.RED, LightColour.AMBER, LightColour.RED},
-			{LightColour.RED, LightColour.RED, LightColour.GREEN},
-			{LightColour.RED, LightColour.RED, LightColour.GREEN},
-			{LightColour.RED, LightColour.RED, LightColour.GREEN},
-			{LightColour.RED, LightColour.RED, LightColour.GREEN},
-			{LightColour.RED, LightColour.RED, LightColour.AMBER},
-			{LightColour.RED, LightColour.RED, LightColour.AMBER},
-		};
 	private int indexLight = 0;
 	private int indexLightMinor = 0;
 	//constructors
